@@ -1,45 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:zomato_app/ZomatoHomePage.dart';
 import 'package:zomato_app/ZomatoRepository.dart';
 import 'package:zomato_app/HorizontalBar.dart';
 
+import 'Theme/Themes.dart';
+
 void main() {
 
-//  ZomatoRepository zomatoRepository = ZomatoRepository();
-  runApp(MyApp());
+  ZomatoRepository zomatoRepository = ZomatoRepository();
+  runApp(MyApp(zomatoRepository: zomatoRepository,));
 }
 
 class MyApp extends StatelessWidget {
 
-//   final ZomatoRepository zomatoRepository;
+   final ZomatoRepository zomatoRepository;
 
-//  MyApp();
+  MyApp({this.zomatoRepository});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ZomatoPage(),
-    );
-  }
-}
-
-class ZomatoPage extends StatefulWidget {
-  @override
-  _ZomatoPageState createState() => _ZomatoPageState();
-}
-
-class _ZomatoPageState extends State<ZomatoPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Zomato clone'),),
-      body: Container(
-          child: Column(
-            children: <Widget>[
-          HorizontalBar()
-            ],
-          ),
-        ),
-
+      home: ZomatoPage(zomatoRepository: zomatoRepository,),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

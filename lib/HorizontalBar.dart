@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/category_selected_bloc.dart';
+import 'bloc/category_selected_event.dart';
+import 'models/Category.dart';
 
 class HorizontalBar extends StatefulWidget {
   @override
@@ -30,7 +35,8 @@ Widget buildItem(context, index) {
       height: 50,
       width: 150,
       margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Material(  // <----------------------------- Outer Material
+      child: Material(
+        // <----------------------------- Outer Material
         shadowColor: Colors.grey[50],
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
         elevation: 6.0,
@@ -46,15 +52,20 @@ Widget buildItem(context, index) {
               ],
             ),
           ),
-          child: Material(  // <------------------------- Inner Material
+          child: Material(
+            // <------------------------- Inner Material
             type: MaterialType.transparency,
             elevation: 6.0,
             color: Colors.transparent,
             shadowColor: Colors.grey[50],
             child: InkWell(
-              borderRadius: BorderRadius.all(Radius.circular(6.0)),//<------------------------- InkWell
+              borderRadius: BorderRadius.all(Radius.circular(6.0)),
+              //<------------------------- InkWell
               splashColor: Colors.white30,
-              onTap: () {},
+              onTap: () {
+                BlocProvider.of<CategorySelectedBloc>(context).dispatch(
+                    CategorySelected(category: Category(id: 1, name: "Dosa")));
+              },
               child: Center(
                 child: Container(
                   child: Text(
