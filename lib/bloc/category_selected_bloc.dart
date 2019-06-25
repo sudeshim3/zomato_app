@@ -5,20 +5,20 @@ import 'package:zomato_app/models/Category.dart';
 import './bloc.dart';
 
 class CategorySelectedBloc
-    extends Bloc<CategorySelectedEvent, CategorySelectedState> {
+    extends Bloc<CategorySelectedEvent, CategoryState> {
   final ZomatoRepository zomatoRepository;
 
   CategorySelectedBloc({this.zomatoRepository})
       : assert(zomatoRepository != null);
 
   @override
-  CategorySelectedState get initialState => UnInitializedCategoryState();
+  CategoryState get initialState => CategoryFetchingState();
 
   @override
-  Stream<CategorySelectedState> mapEventToState(
+  Stream<CategoryState> mapEventToState(
       CategorySelectedEvent event) async* {
     if (event is CategorySelected) {
-      yield CategoryFetchingState();
+//      yield CategoryFetchingState();
       try {
         final List<Categories> category =
         await zomatoRepository.fetchZomatoCategories();
